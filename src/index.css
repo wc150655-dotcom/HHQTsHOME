@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   恨海情天 纯LE —— 静奢 / 解构主义 / 极简杂志风 设计令牌
+   ============================================================ */
+:root {
+  --bg: #f6f5f2;
+  --panel: rgba(255, 255, 255, 0.72);
+  --ink: #1d1d1f;
+  --ink-soft: #494849;
+  --muted: #86868b;
+  --line: #dcdce0;
+  --line-strong: #b4b0a8;
+  --accent: #8f6a2b;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(143, 106, 43, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glow: rgba(29, 29, 31, 0.16);
+  --shadow-soft: 0 30px 80px -40px rgba(29, 29, 31, 0.35);
+}
+html.dark {
+  --bg: #131112;
+  --panel: rgba(19, 17, 18, 0.72);
+  --ink: #e6e6e6;
+  --ink-soft: #c3c3c3;
+  --muted: #8a8a8a;
+  --line: #2c2a2b;
+  --line-strong: #4a4748;
+  --accent: #c8a45c;
+  --accent-ink: #131112;
+  --accent-soft: rgba(200, 164, 92, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-bg: rgba(19, 17, 18, 0.5);
+  --glow: rgba(230, 230, 230, 0.12);
+  --shadow-soft: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+}
+
+/* 墨色全幅区块（无论主题均为暗底亮字，制造明暗节奏） */
+.ink-block {
+  --bg: #131112;
+  --panel: rgba(255, 255, 255, 0.04);
+  --ink: #e6e6e6;
+  --ink-soft: #c3c3c3;
+  --muted: #8a8a8a;
+  --line: #2c2a2b;
+  --line-strong: #4a4748;
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(19, 17, 18, 0.55);
+  --glow: rgba(230, 230, 230, 0.14);
+  background-color: #131112;
+  color: #e6e6e6;
+}
+.ink-block .dot-grid {
+  background-image: radial-gradient(rgba(230, 230, 230, 0.28) 1px, transparent 1px);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* 自定义圆点光标 */
+html.cursor-dot,
+html.cursor-dot * {
+  cursor: none !important;
+}
+@media (pointer: coarse) {
+  html.cursor-dot,
+  html.cursor-dot * {
+    cursor: auto !important;
+  }
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 唱片纹路 + 旋转 */
+@keyframes vinylSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 左下角文案：逐字出现 + 已生成字符随机模糊消隐 */
+@keyframes quoteBlur {
+  0%,
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  50% {
+    opacity: var(--qf, 0.3);
+    filter: blur(var(--qb, 4px));
+  }
+}
+.quote-char {
+  animation: quoteBlur var(--qd, 8s) ease-in-out var(--qdel, 0s) infinite;
+  will-change: opacity, filter;
+}
+
+/* 希腊回纹分隔条 */
+.greek-divider {
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 14"%3E%3Cdefs%3E%3Cpattern id="gk" width="24" height="14" patternUnits="userSpaceOnUse"%3E%3Cpath d="M0 11 V3 H6 V11 H12 V3 H18 V11 H24" fill="none" stroke="%23A9A9AF" stroke-width="1.2"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="1200" height="14" fill="url(%23gk)"/%3E%3C/svg%3E');
+  background-repeat: repeat-x;
+  background-size: 1200px 14px;
+}
+html.dark .greek-divider {
+  background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 14"%3E%3Cdefs%3E%3Cpattern id="gk" width="24" height="14" patternUnits="userSpaceOnUse"%3E%3Cpath d="M0 11 V3 H6 V11 H12 V3 H18 V11 H24" fill="none" stroke="%234A4748" stroke-width="1.2"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="1200" height="14" fill="url(%23gk)"/%3E%3C/svg%3E');
+}
+.ink-block .greek-divider {
+  background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 14"%3E%3Cdefs%3E%3Cpattern id="gk" width="24" height="14" patternUnits="userSpaceOnUse"%3E%3Cpath d="M0 11 V3 H6 V11 H12 V3 H18 V11 H24" fill="none" stroke="%234A4748" stroke-width="1.2"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="1200" height="14" fill="url(%23gk)"/%3E%3C/svg%3E');
+}
+
+/* 跑马灯 */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+
+/* 杂志式描边大数字 */
+.outline-num {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.9;
+  user-select: none;
+}
+
+.vinyl-disc {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      #131112 0 13%,
+      #232021 13.5% 14%,
+      #131112 14.5% 30%,
+      #2a2728 30.5% 31.2%,
+      #131112 31.8% 47%,
+      #232021 47.5% 48.2%,
+      #131112 48.8% 62%,
+      #2a2728 62.5% 63.2%,
+      #131112 63.8% 100%
+    );
+  animation: vinylSpin 2.6s linear infinite;
+}
+
+@layer components {
+  /* 玻璃拟态 */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(1.05);
+    -webkit-backdrop-filter: blur(16px) saturate(1.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px -34px var(--glow);
+  }
+  /* 极细分割线 */
+  .hairline-t {
+    border-top: 1px solid var(--line);
+  }
+  .hairline-b {
+    border-bottom: 1px solid var(--line);
+  }
+  /* 点阵背景 */
+  .dot-grid {
+    background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  /* 卡片悬浮发光 + 浮起 */
+  .card-glow {
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease,
+      border-color 0.45s ease;
+  }
+  .card-glow:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft), 0 0 0 1px var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-ink);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .btn-accent:hover {
+    opacity: 0.88;
+  }
+  .btn-accent:active {
+    transform: scale(0.98);
+  }
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    letter-spacing: 0.4em;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  /* 后台表单控件 */
+  .field-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 5px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .field-input:focus {
+    border-color: var(--accent);
+  }
+  .field-label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+  }
+}
