@@ -1,6 +1,6 @@
 /** 路由与应用外壳 —— 老板端 + 超级管理员后台（/admin） */
 import { useEffect } from 'react';
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { StoreProvider } from './lib/store';
 import { ThemeManager } from './components/ThemeManager';
 import { MusicSystem } from './components/MusicSystem';
@@ -37,7 +37,7 @@ function ClientShell({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <StoreProvider>
-      <BrowserRouter>
+      <HashRouter>
         <ThemeManager />
         <ScrollToTop />
         <Routes>
@@ -48,7 +48,7 @@ export default function App() {
           <Route path="/admin/*" element={<AdminApp />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </StoreProvider>
   );
 }

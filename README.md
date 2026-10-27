@@ -50,7 +50,24 @@ npm run preview  # 预览生产构建
 - 后台「总览 → 数据管理」支持**导出 / 导入 JSON 备份**，用于多设备同步或迁移；也可一键恢复默认数据（保留账号与日志）。
 - 卡项价格、陪玩资料、头牌业绩等均为**示例占位数据**，请按团内真实情况在后台修改（包天/包夜等细则以腾讯文档为准）。
 - 塔罗榜单默认未配置（按需求呈现「静候揭晓」空占位）。
-- 图片/音频上传以 data URL 存储，受浏览器容量限制（约 5MB），大文件建议使用外链（粘贴链接）或后续接入服务端。
+- 图片上传自动压缩后存于 localStorage（约 5MB 总量）；音频大文件存于浏览器 IndexedDB（单文件上限 80MB），换设备需重新上传或用外链。
+
+## 部署到 GitHub Pages
+
+站点地址：**https://wc150655-dotcom.github.io/HHQTsHOME/** ｜ 后台：**https://wc150655-dotcom.github.io/HHQTsHOME/#/admin/login**
+
+路由使用 HashRouter（`#/` 号路由）+ 相对资源路径，刷新、直达任意页面都不会 404。
+
+**方式 A · 自动部署（推荐）**：推送到 `main` 分支后，GitHub 仓库 → Settings → Pages → Source 选择 **GitHub Actions**。仓库已内置工作流 `.github/workflows/deploy.yml`，之后每次推送自动构建发布。
+
+**方式 B · 手动部署**：
+```bash
+npm run build     # 生成 dist/（自动附带 404.html 与 .nojekyll）
+npm run deploy    # 将 dist 推送到 gh-pages 分支
+```
+然后在 Settings → Pages → Source 选择 **Deploy from a branch** → `gh-pages` 分支 / (root)。
+
+> 注意：Pages 每次发布后需等待约 1–2 分钟生效；旧链接（无 # 号）会经 404.html 自动回到站点。
 
 ## 技术栈
 
